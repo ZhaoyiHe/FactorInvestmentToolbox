@@ -5,7 +5,7 @@ class DataPreprocess(object):
     def __init__(self):
         pass
 
-    def filter_extreme_values(self,series, n=3):
+    def filter_extreme_values(self, series, n=3):
         """
         Use median to filter extreme values
         """
@@ -15,12 +15,14 @@ class DataPreprocess(object):
         min_limit = median - n * md
         return np.clip(series, min_limit, max_limit)
 
-    def standardize(self,series):
+    def standardize(self, series):
+        """Standardize series/Calculate Z-score"""
         mean = series.mean()
         std = series.std()
         return (series - mean) / std
 
-    def rank_standardize(self,series):
+    def rank_standardize(self, series):
+        """Standardize rank of series"""
         series = series.rank()
         mean = series.mean()
         std = series.std()

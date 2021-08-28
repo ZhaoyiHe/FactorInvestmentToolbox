@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # selected_factors = list()
     # for i in range(100):
     #    selected_factors.append(random.choice(all_factors))
-    selected_factor = 'pe_ratio_ttm'
+    selected_factor = 'peg_ratio_ttm'
 
     """
     Get historical index components.
@@ -79,8 +79,7 @@ if __name__ == "__main__":
     factor_data = factor_data.pivot(index='date', columns='symbol', values='factor_value')
     factor_data.to_pickle('./data/factor_data.pkl')
     # selected_factors = rq.get_factor(index_comp,selected_factors,start_date='2015-01-01',end_date='2021-08-01')
-    mktcap_data =rq.get_factor(all_stocks, 'market_cap', start_date=start_date,
-                                end_date=end_date)  # get single_factor_data
+    mktcap_data =rq.get_factor(all_stocks, 'market_cap', start_date=start_date,end_date=end_date)  # get single_factor_data
     mktcap_data = mktcap_data.stack().reset_index().rename(
         columns={"level_0": "date", "level_1": "symbol", 0: "mktcap_value"})
     mktcap_data = pd.merge(mktcap_data, stocks_df, how="inner")
